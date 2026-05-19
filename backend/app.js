@@ -139,7 +139,8 @@ app.use((err, req, res, next) => {
 });
 
 /* ================= SERVER ================= */
-app.listen(2000, () => {
-  console.log("Server running on port 2000");
-});
+const PORT = process.env.PORT || 2000;
 
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
