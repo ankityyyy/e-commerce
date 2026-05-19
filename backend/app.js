@@ -6,7 +6,6 @@ import cors from "cors";
 import session from "express-session";
 import passport from "passport";
 import GoogleStrategy from "passport-google-oauth20";
-import { insertProducts } from "./initdb.js";
 import User from "./src/models/user.js";
 import userRoute from "./src/routes/user.js";
 import productRoute from "./src/routes/product.js";
