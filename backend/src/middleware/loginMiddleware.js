@@ -1,6 +1,6 @@
 import User from "../models/user.js";
 import wrapAsync from "../utils/wrapAsync.js";
-import ExpressError from "../utils/expressError.js";
+import ExpressError from "../utils/ExpressError.js";
 import jwt from "jsonwebtoken";
 import { StatusCodes } from "http-status-codes";
 

@@ -11,7 +11,7 @@ import userRoute from "./src/routes/user.js";
 import productRoute from "./src/routes/product.js";
 import orderRoute from "./src/routes/order.js";
 import reviewRoute from "./src/routes/reviews.js";
-import ExpressError from "./src/utils/expressError.js";
+import ExpressError from "./src/utils/ExpressError.js";
 import { StatusCodes } from "http-status-codes";
 import  cartRoute from "./src/routes/cart.js";
 import razorpayRoute from "./src/routes/payment.js"

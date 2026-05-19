@@ -1,5 +1,5 @@
 import User from "../models/user.js";
-import ExpressError from "../utils/expressError.js";
+import ExpressError from "../utils/ExpressError.js";
 import bcrypt from "bcrypt";
 import { StatusCodes } from "http-status-codes";
 import jwt from "jsonwebtoken";
