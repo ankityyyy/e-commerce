@@ -1,6 +1,6 @@
 import Razorpay from "razorpay";
 import crypto from "crypto";
-import Product from "../models/product.js";
+import Product from "../models/Product.js";
 import  Cart  from "../models/cart.js";
 import Payment from "../models/payment.js";
 import Order from "../models/order.js";

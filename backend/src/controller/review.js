@@ -1,5 +1,5 @@
 import Review from "../models/review.js";
-import Product from "../models/product.js";
+import Product from "../models/Product.js";
 import { StatusCodes } from "http-status-codes";
 import ExpressError from "../utils/ExpressError.js";
  
