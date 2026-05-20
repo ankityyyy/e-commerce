@@ -9,8 +9,8 @@ import crypto from "crypto";
 import { addMemory ,searchMemory} from "../../memory/mem0.js";
 import { StatusCodes } from "http-status-codes";
 import ExpressError from "../../utils/ExpressError.js";
-import { extractTriples } from "../../Knowledgegraph/graphExtractor.js";
-import { addTriples,queryFacts} from "../../Knowledgegraph/graph.js";
+import { extractTriples } from "../../KnowledgeGraph/graphExtractor.js"; 
+import { addTriples,queryFacts} from "../../KnowledgeGraph/graph.js";
 import {ragGraph} from "../../graph/productGraph.js" 
 
 export const storeDataInVd=async(req,res,next)=>{
