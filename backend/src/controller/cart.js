@@ -1,7 +1,7 @@
 import  Cart  from "../models/cart.js";
 import { StatusCodes } from "http-status-codes";
 import ExpressError from "../utils/ExpressError.js";
-import  Product  from "../models/product.js";
+import  Product  from "../models/Product.js";
 
 export const getCart=async(req,res)=>{
  

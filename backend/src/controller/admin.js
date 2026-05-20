@@ -1,5 +1,5 @@
 import Order from "../models/order.js";
-import Product from "../models/product.js";
+import Product from "../models/Product.js";
 import User from "../models/user.js";
 import OpenAI from "openai";
 
