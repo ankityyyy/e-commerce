@@ -1,4 +1,4 @@
-import Product from "../models/product.js";
+import Product from "../models/Product.js";
 import ExpressError from "../utils/ExpressError.js";
 import {StatusCodes} from "http-status-codes"
 import wrapAsync from "../utils/wrapAsync.js";
