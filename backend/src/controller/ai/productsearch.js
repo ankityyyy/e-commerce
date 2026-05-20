@@ -1,4 +1,4 @@
-import Product from "../../models/product.js";
+import Product from "../../models/Product.js";
 import { EmbeddingService } from "../../services/embd.js";
 import crypto from "crypto";
  import { VectorStore } from "../../services/vectoeStore.js";
