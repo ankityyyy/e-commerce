@@ -266,7 +266,7 @@ export default function Checkout() {
 
       // ✅ STEP 2: Create Razorpay Order using orderId
       const { data } = await axios.post(
-        "http://localhost:2000/razorpay/v1",
+        "https://ecommerce-backend1-117w.onrender.com/razorpay/v1",
         { orderId },
         { withCredentials: true }
       );
@@ -284,7 +284,7 @@ export default function Checkout() {
           try {
             // ✅ STEP 3: Verify Payment
             const verifyRes = await axios.post(
-              "http://localhost:2000/razorpay/v1/verify",
+              "https://ecommerce-backend1-117w.onrender.com/razorpay/v1/verify",
               {
                 ...response,
                 orderId,

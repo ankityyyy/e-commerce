@@ -56,7 +56,7 @@ const handleReviewSummary = async () => {
     setSummaryLoading(true);
 
     const res = await fetch(
-      `http://localhost:2000/api/v1/ai/review-summary/${id}`
+      `https://ecommerce-backend1-117w.onrender.com/api/v1/ai/review-summary/${id}`
     );
 
     const data = await res.json();
