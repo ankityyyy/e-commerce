@@ -1,4 +1,4 @@
-import { queryFacts } from "../Knowledgegraph/graph.js";
+import { queryFacts } from "../KnowledgeGraph/graph.js";
 
 export const graphQueryNode = async (state) => {
   try {

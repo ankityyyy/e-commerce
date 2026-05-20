@@ -1,5 +1,5 @@
-import { extractTriples } from "../Knowledgegraph/graphExtractor.js";
-import { addTriples } from "../Knowledgegraph/graph.js";
+import { extractTriples } from "../KnowledgeGraph/graphExtractor.js";
+import { addTriples } from "../KnowledgeGraph/graph.js";
 
 export const ingestionNode = async (state) => {
   const { product } = state;
