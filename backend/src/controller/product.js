@@ -58,13 +58,13 @@ export const getProductById=async(req,res,next)=>{
 
   const cachedProduct = await redisClient.get(`product:${id}`);
 
-  if (cachedProduct) {
-   
-    return res.status(StatusCodes.OK).json({
-      product: JSON.parse(cachedProduct),
-      message: "fetch product (from cache)"
-    });
-  }
+if (cachedProduct) {
+
+  return res.status(StatusCodes.OK).json({
+    product: cachedProduct,
+    message: "fetch product (from cache)"
+  });
+}
 
 
   const product = await Product.findById(id);
@@ -73,7 +73,13 @@ export const getProductById=async(req,res,next)=>{
     return next(new ExpressError("Product not found", StatusCodes.NOT_FOUND));
   }
 
-    await redisClient.setEx(`product:${id}`,3600,JSON.stringify(product));
+   await redisClient.set(
+  `product:${id}`,
+  JSON.stringify(product),
+  {
+    ex: 3600,
+  }
+);
 
 
   return res.status(StatusCodes.OK).json({ product ,message:"fetch product (from DB)"});

@@ -22,7 +22,7 @@ import razorpayRoute from "./src/routes/payment.js"
 
  dotenv.config();
 const dbUrl = process.env.ATLASDB_URL;   
-
+console.log(process.env.RAZORPAY_KEY_SECRET);
 export const app = express();
 
 /* ================= DB ================= */
@@ -117,7 +117,7 @@ app.get("/me", (req, res) => {
 /* ================= OTHER ROUTES ================= */
 app.use("/user/v1", userRoute);
 app.use("/product/v1", productRoute);
-app.use("/review/v1",reviewRoute) 
+app.use("/review/v1",reviewRoute)  
 app.use("/cart/v1",cartRoute) 
 app.use("/order/v1",orderRoute) 
 app.use("/razorpay/v1",razorpayRoute) 

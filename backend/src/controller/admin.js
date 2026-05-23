@@ -3,11 +3,12 @@ import Product from "../models/Product.js";
 import User from "../models/user.js";
 import OpenAI from "openai";
 
-const openai = new OpenAI({
+const openai = new OpenAI({ 
   apiKey: process.env.OPENAI_API_KEY,
 });
 
 export const adminDashboard = async (req, res) => {
+  console.log("req come")
   try {
     const [orders, products, users] = await Promise.all([
       Order.find(),
@@ -160,6 +161,8 @@ Rules:
       console.log("AI parse error:", e.message);
     }
 
+    console.log(aiSalesSummary)
+    console.log( aiProductInsights)
     // =================================================
     // STEP 7: FINAL RESPONSE
     // =================================================
