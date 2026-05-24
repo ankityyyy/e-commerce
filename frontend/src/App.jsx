@@ -31,7 +31,7 @@ const Checkout = lazy(() => import("./pages/CheckOut"));
 const MyOrders = lazy(() => import("./pages/MyOrders"));
 const ProductDetails = lazy(() => import("./pages/ProductDetails"));
 const Login = lazy(() => import("./pages/Login"));
-const SignUp = lazy(() => import("./pages/SignUp"));
+const SignUp = lazy(() => import("./pages/Signup"));
 const AISearch =lazy(()=>import("./pages/AISearch"))
 
 function App() {
