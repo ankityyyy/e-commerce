@@ -466,136 +466,18 @@ export default function Checkout() {
 
       // ✅ STEP 2: CREATE RAZORPAY ORDER
       const { data } = await axios.post(
-        "http://localhost:2000/razorpay/v1",
+        "https://e-commerce-2p81.onrender.com/razorpay/v1",
         { orderId }
       );
 
       
       const razorpayOrder = data.razorpayOrder;
 
-//       console.log("RAZORPAY ORDER:", razorpayOrder);
-
-//       // ✅ IMPORTANT DEBUG
-//       console.log("RAZORPAY ORDER ID:", razorpayOrder.id);
-//       console.log("RAZORPAY AMOUNT:", razorpayOrder.amount);
-//       console.log("RAZORPAY RESPONSE:", data);
-//       console.log("BACKEND KEY:", data.key);
-// console.log("ORDER:", razorpayOrder);
-// console.log("ORDER ID:", razorpayOrder.id);
-// console.log("AMOUNT:", razorpayOrder.amount);
-console.log("=========.......................... FINAL DEBUG =========");
-
-console.log("FULL BACKEND DATA:", data);
-
-console.log("KEY:", data.key);
-
-console.log("RAZORPAY ORDER:", razorpayOrder);
-
-console.log("ORDER ID:", razorpayOrder?.id);
-
-console.log("AMOUNT:", razorpayOrder?.amount);
-
-console.log("WINDOW RAZORPAY:", window.Razorpay);
 
 
-      // const options = {
 
-
-      //   // ⚠️ USE SAME ACCOUNT KEY
-      //   key: data.key,
-
-      //   amount: razorpayOrder.amount,
-
-      //   currency: "INR",
-
-      //   name: "My Shop",
-
-      //   description: "Test Transaction",
-
-      //   order_id: razorpayOrder.id,
-
-      //   handler: async function (response) {
-
-      //     console.log("========= PAYMENT SUCCESS =========");
-
-      //     console.log("RAZORPAY SUCCESS RESPONSE:", response);
-
-      //     console.log("PAYMENT ID:", response.razorpay_payment_id);
-
-      //     console.log("ORDER ID:", response.razorpay_order_id);
-
-      //     console.log("SIGNATURE:", response.razorpay_signature);
-
-      //     try {
-
-      //       const verifyPayload = {
-      //         ...response,
-      //         orderId,
-      //       };
-
-      //       console.log("VERIFY PAYLOAD:", verifyPayload);
-
-      //       const verifyRes = await axios.post(
-      //         "http://localhost:2000/razorpay/v1/verify",
-      //         verifyPayload
-      //       );
-
-      //       console.log("VERIFY RESPONSE:", verifyRes.data);
-
-      //       if (verifyRes.data.success) {
-
-      //         console.log("✅ PAYMENT VERIFIED");
-
-      //         dispatch(getAllCartProduct());
-
-      //         alert("Payment successful & order placed");
-
-      //         navigate("/");
-
-      //       } else {
-
-      //         console.log("❌ VERIFY FAILED");
-
-      //         alert("Payment verification failed");
-      //       }
-
-      //     } catch (err) {
-
-      //       console.log("========= VERIFY ERROR =========");
-
-      //       console.log("FULL ERROR:", err);
-
-      //       if (err.response) {
-
-      //         console.log("ERROR STATUS:", err.response.status);
-
-      //         console.log("ERROR DATA:", err.response.data);
-      //       }
-
-      //       alert("Verification error");
-      //     }
-
-      //     setLoading(false);
-      //   },
-
-      //   modal: {
-      //     ondismiss: function () {
-
-      //       console.log("❌ PAYMENT POPUP CLOSED");
-
-      //       setLoading(false);
-      //     },
-      //   },
-
-      //   prefill: {
-      //     name: address.fullName,
-      //     contact: address.phone,
-      //   },
-
-      //   theme: {
-      //     color: "#000000",
-      //   },
-      // };
+      
+      
 
       const options = {
 
@@ -617,14 +499,10 @@ console.log("WINDOW RAZORPAY:", window.Razorpay);
 
   handler: async function (response) {
 
-    console.log("✅ PAYMENT SUCCESS");
-
-    console.log(response);
-
     try {
 
       const verifyRes = await axios.post(
-        "http://localhost:2000/razorpay/v1/verify",
+        "https://e-commerce-2p81.onrender.com/razorpay/v1/verify",
         {
           razorpay_order_id: response.razorpay_order_id,
           razorpay_payment_id: response.razorpay_payment_id,
@@ -633,7 +511,7 @@ console.log("WINDOW RAZORPAY:", window.Razorpay);
         }
       );
 
-      console.log("VERIFY RESPONSE:", verifyRes.data);
+    
 
       if (verifyRes.data.success) {
 
@@ -680,19 +558,7 @@ console.log("WINDOW RAZORPAY:", window.Razorpay);
     color: "#000000",
   },
 };
-      // ✅ IMPORTANT DEBUG
-      console.log("========= RAZORPAY OPTIONS =========");
-
-      console.log("WINDOW RAZORPAY:", window.Razorpay);
-
-      console.log("OPTIONS:", options);
-
-      console.log("KEY:", options.key);
-
-      console.log("ORDER ID:", options.order_id);
-
-      console.log("AMOUNT:", options.amount);
-
+     
       // ✅ CHECK IF SCRIPT LOADED
       if (!window.Razorpay) {
 
@@ -710,24 +576,7 @@ console.log("WINDOW RAZORPAY:", window.Razorpay);
       // ✅ PAYMENT FAILED DEBUG
       rzp.on("payment.failed", function (response) {
 
-        console.log("========= PAYMENT FAILED =========");
-
-        console.log("FULL FAILED RESPONSE:", response);
-
-        console.log("ERROR:", response.error);
-
-        console.log("CODE:", response.error.code);
-
-        console.log("DESCRIPTION:", response.error.description);
-
-        console.log("SOURCE:", response.error.source);
-
-        console.log("STEP:", response.error.step);
-
-        console.log("REASON:", response.error.reason);
-
-        console.log("METADATA:", response.error.metadata);
-
+    
         alert("Payment failed: " + response.error.description);
 
         setLoading(false);

@@ -22,7 +22,8 @@ import razorpayRoute from "./src/routes/payment.js"
 
  dotenv.config();
 const dbUrl = process.env.ATLASDB_URL;   
-console.log(process.env.RAZORPAY_KEY_SECRET);
+
+
 export const app = express();
 
 /* ================= DB ================= */
