@@ -84,7 +84,7 @@ function Cart() {
                 {/* REMOVE BUTTON */}
                 <button
                   onClick={() => handleRemove(item.productId?._id)}
-                  className="text-red-500 font-semibold"
+                  className="text-red-500 font-semibold cursor-pointer"
                 >
                   Remove
                 </button>
@@ -113,7 +113,7 @@ function Cart() {
             <button
               
                onClick={() => navigate("/checkout")}
-              className="w-full mt-4 bg-green-600 text-white py-2 rounded"
+              className="w-full mt-4 bg-green-600 text-white py-2 rounded cursor-pointer"
             >
               Place Order
             </button>

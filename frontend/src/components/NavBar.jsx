@@ -191,6 +191,7 @@ export default function NavBar() {
   const [showProfile, setShowProfile] = useState(false);
 
   const [query, setQuery] = useState("");
+  const [searchLoading, setSearchLoading] = useState(false);
 
   // LOGOUT
 
@@ -207,25 +208,33 @@ export default function NavBar() {
 
   const handleAISearch = async () => {
 
-    try {
+  try {
 
-      if (!query.trim()) return;
+    if (!query.trim()) return;
 
-      await dispatch(getProductai(query));
+    setSearchLoading(true);
 
-      navigate("/ai-search");
+    await dispatch(getProductai(query)).unwrap();
 
-      setQuery("");
+    navigate("/ai-search");
 
-    } catch (err) {
+    setQuery("");
 
-      console.error(err);
-    }
-  };
+  } catch (err) {
+
+    console.error(err);
+
+  } finally {
+
+    setSearchLoading(false);
+
+  }
+};
 
   return (
 
-    <div className="w-[100vw] h-[70px] bg-[#ecfafaec] z-10 fixed top-0 flex items-center justify-between px-[30px] shadow-md shadow-black">
+    // <div className="w-[100vw] h-[70px] bg-[#ecfafaec] z-10 fixed top-0 flex items-center justify-between px-[30px] shadow-md shadow-black">
+    <div className="w-full h-[70px] bg-white z-50 fixed top-0 left-0 flex items-center justify-between px-[30px] shadow-md">
 
       {/* LEFT */}
 
@@ -307,11 +316,12 @@ export default function NavBar() {
           />
 
           <button
-            onClick={handleAISearch}
-            className="text-[15px] hover:bg-slate-500 cursor-pointer bg-[#000000c9] py-[10px] px-[20px] rounded-2xl text-[white]"
-          >
-            Search
-          </button>
+  onClick={handleAISearch}
+  disabled={searchLoading}
+  className="text-[15px] hover:bg-slate-500 cursor-pointer bg-[#000000c9] py-[10px] px-[20px] rounded-2xl text-white disabled:opacity-50"
+>
+  {searchLoading ? "Searching..." : "Search"}
+</button>
 
         </div>
 
