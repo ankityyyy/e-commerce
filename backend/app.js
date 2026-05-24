@@ -45,7 +45,7 @@ app.set("trust proxy", 1);
 
 app.use(
   cors({
-    origin: ["https://majestic-fudge-6b1920.netlify.app", "http://localhost:5174"],
+    origin: ["https://majestic-fudge-6b1920.netlify.app", "https://zippy-crostata-e0d3dc.netlify.app"],
     credentials: true,
     methods: ["GET", "POST", "PUT","PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
