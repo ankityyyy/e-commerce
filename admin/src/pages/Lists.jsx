@@ -40,11 +40,12 @@ export default function Lists(){
       >
         {/* LEFT SIDE */}
         <div className="flex items-center gap-[10px] md:gap-[30px]">
+          
           <img
-            src={item.images?.[0]?.url}
-            className='w-[30%] md:w-[120px] h-[90%] rounded-lg object-cover'
-            alt={item.name}
-          />
+  src={item.images?.[0]?.url}
+  className='w-[80px] md:w-[120px] h-[80px] md:h-[100px] rounded-lg object-contain bg-white p-1'
+  alt={item.name}
+/>
 
           <div className='flex flex-col gap-1'>
             <div className='md:text-[20px] text-[15px] text-[#bef0f3]'>

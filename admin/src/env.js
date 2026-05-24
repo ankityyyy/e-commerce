@@ -1,7 +1,6 @@
 let IS_PROD = true;
 
 const server = IS_PROD
-  ?"http://localhost:2000"
-  :"https://ecommerce-backend1-117w.onrender.com"  ;
-
+  ?"https://e-commerce-2p81.onrender.com"
+  :"http://localhost:2000";
 export default server;
