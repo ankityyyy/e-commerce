@@ -394,11 +394,11 @@ export default function NavBar() {
 
             )}
 
-            <li className="w-full hover:bg-[#2f2f2f] px-[15px] py-[10px] cursor-pointer">
+            <li className="w-full hover:bg-[#2f2f2f] px-[15px] py-[10px] cursor-pointer"  onClick={() => navigate("/orders")}>
               Orders
             </li>
 
-            <li className="w-full hover:bg-[#2f2f2f] px-[15px] py-[10px] cursor-pointer">
+            <li className="w-full hover:bg-[#2f2f2f] px-[15px] py-[10px] cursor-pointer"  onClick={() => navigate("/about")}>
               About
             </li>
 
