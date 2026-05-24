@@ -107,7 +107,8 @@ const startDb=new VectorStore();
 // await startDb.deleteCollection();
 
  await startDb.createCollection()
-app.get("/me", (req, res) => {
+ 
+app.get("/", (req, res) => {
  
   res.json("i am working");
 });
