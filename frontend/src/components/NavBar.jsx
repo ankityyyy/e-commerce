@@ -275,7 +275,7 @@ export default function NavBar() {
           </li>
 
           <li
-            className="text-[15px] hover:bg-slate-500 cursor-pointer bg-[#000000c9] py-[10px] px-[20px] rounded-2xl"
+            className="text-[15px] hover:bg-slate-500 cursor-pointer bg-[#000000c9] py-[10px] px-[20px] rounded-2xl  cursor-pointer"
             onClick={() => navigate("/contact")}
           >
             CONTACT
