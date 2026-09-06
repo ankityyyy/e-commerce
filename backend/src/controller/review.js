@@ -26,7 +26,7 @@ export const createReview = async (req, res, next) => {
     return next(new ExpressError("Product not found", 400));
   }
 
-console.log(productId)
+
   try {
     const newReview = new Review({
       userId:req.user._id ,
@@ -47,7 +47,7 @@ console.log(productId)
 };
 
 
-// 🔹 DELETE REVIEW (SOFT DELETE)
+
 export const deleteReview = async (req, res, next) => {
   const { productId, reviewId } = req.params;
 

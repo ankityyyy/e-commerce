@@ -2,7 +2,7 @@ import User from "../models/user.js";
 import ExpressError from "../utils/ExpressError.js";
 import bcrypt from "bcrypt";
 import { StatusCodes } from "http-status-codes";
-import jwt from "jsonwebtoken";
+import jwt from "jsonwebtoken"; 
 
 /* ================= REGISTER ================= */
 const register = async (req, res, next) => {
@@ -111,7 +111,7 @@ const logout = async (req, res, next) => {
   req.logout(function (err) {
     if (err) {
       return next(err);
-    }
+    } 
 
     // 🔥 destroy session completely
     req.session.destroy(() => {

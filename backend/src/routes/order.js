@@ -19,7 +19,7 @@ router.get("/admin",isLogin,roleMiddleware("admin", "seller"),getAllOrders);
 
 
 // Get single order
-router.get("/", getSingleOrder);
+router.get("/",isLogin, getSingleOrder);
 
 router.patch("/admin/:id/status", isLogin,roleMiddleware("admin", "seller"),updateOrderStatus);
 

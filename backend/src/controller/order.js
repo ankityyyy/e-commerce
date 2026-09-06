@@ -4,7 +4,7 @@ import { StatusCodes } from "http-status-codes";
 import ExpressError from "../utils/ExpressError.js";
 import wrapAsync from "../utils/wrapAsync.js";
 import  Cart  from "../models/cart.js";
-import {sendOrderEmail} from "./sendEmail.js"
+
 
 export const createOrder = wrapAsync(async (req, res) => {
   const { items, shippingAddress } = req.body;
@@ -38,7 +38,7 @@ export const createOrder = wrapAsync(async (req, res) => {
 
   const totalAmount = subtotal;
 
-  // ✅ ONLY create order (no payment yet)
+  
   const order = await Order.create({
     userId: req.user._id,
     items: detailedItems,
@@ -48,9 +48,9 @@ export const createOrder = wrapAsync(async (req, res) => {
     shippingCharge: 0,
     totalAmount,
 
-    paymentStatus: "PENDING",   // ✅ FIX
+    paymentStatus: "PENDING",   
     paymentMethod: "RAZORPAY",
-    orderStatus: "PENDING",     // ✅ FIX
+    orderStatus: "PENDING",     
   });
 
   res.status(201).json({
@@ -60,24 +60,19 @@ export const createOrder = wrapAsync(async (req, res) => {
   });
 });
 
-// ✅ GET SINGLE ORDER
+
 export const getSingleOrder = wrapAsync(async (req, res) => {
-  
-
-  const order = await Order.find({});
-
- 
-
+  const order = await Order.find({userId:req.user._id});
  return res.status(StatusCodes.OK).json({ order,message:"featch all order"});
 });
 
-export const getAllOrders = wrapAsync(async (req, res) => {
-  
 
+
+export const getAllOrders = wrapAsync(async (req, res) => {
   const orde = await Order.find({})
     .populate("userId", "name email")
     .sort({ createdAt: -1 });
-
+ 
   return res.status(StatusCodes.OK).json({
     orde,
     message: "Fetched all orders",
@@ -105,26 +100,30 @@ export const updateOrderStatus = wrapAsync(async (req, res) => {
   });
 });
 
-// ✅ CANCEL ORDER
+
 export const cancelOrder = wrapAsync(async (req, res) => {
   const { orderId } = req.params;
 
-  const order = await Order.findById(orderId);
+   const order = await Order.findOne({
+    _id: orderId,
+    userId: req.user._id,
+  });
 
   if (!order) {
     throw new ExpressError("Order not found", 404);
   }
 
-  // ❗ security check
-  if (order.userId.toString() !== req.user._id.toString()) {
-    throw new ExpressError("Not authorized", 403);
-  }
+ 
+  // if (order.userId.toString() !== req.user._id.toString()) {
+  //   throw new ExpressError("Not authorized", 403);
+  // }
 
   if (order.orderStatus === "DELIVERED") {
     throw new ExpressError("Delivered order cannot be cancelled", 400);
   }
 
   order.orderStatus = "CANCELLED";
+
   await order.save();
 
   res.status(200).json({

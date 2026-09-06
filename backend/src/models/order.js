@@ -72,7 +72,7 @@ paymentMethod: {
 },
 
     transactionId: {
-      type: String, // from mock or real gateway
+      type: String, 
     },
 
     shippingAddress: shippingSchema,

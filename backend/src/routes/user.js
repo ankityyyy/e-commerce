@@ -38,14 +38,13 @@ router.get(
     failureRedirect: "http://localhost:5173/login",
   }),
   (req, res) => {
-    // 🔥 create JWT token after Google login
     const token = jwt.sign(
       { userId: req.user._id },
       process.env.JWT_SECRET,
       { expiresIn: "1d" }
     );
 
-    // 🍪 send token in cookie
+   
     res.cookie("token", token, {
       httpOnly: true,
       sameSite: "lax",

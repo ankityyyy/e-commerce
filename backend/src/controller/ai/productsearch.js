@@ -12,6 +12,7 @@ import ExpressError from "../../utils/ExpressError.js";
 import { extractTriples } from "../../KnowledgeGraph/graphExtractor.js"; 
 import { addTriples,queryFacts} from "../../KnowledgeGraph/graph.js";
 import {ragGraph} from "../../graph/productGraph.js" 
+import {getSearchRes} from "../../services/functionCall.js"
 
 export const storeDataInVd=async(req,res,next)=>{
 
@@ -369,6 +370,8 @@ export const query = async (req, res, next) => {
 
     const { query } = req.body;
 
+    
+
      const user_id= req.user?._id;
 
     if (!user_id) {
@@ -389,21 +392,26 @@ export const query = async (req, res, next) => {
         );
     }
 
-    const result = await ragGraph.invoke(
-      {
-        query,
-       user_id,
-      },
-      {
-        configurable: {
-          thread_id:user_id.toString()
-        },
-      }
-    );
+    
+  const result = await getSearchRes(query);
+  
 
-    res.json({
-      message: "query processed",
-      answer: result.answer,
-      products: result.products,
-    });
+  res.json({
+    message: "query processed",
+    answer: result.answer,
+    products: result.products,
+  });
+    // const result = await ragGraph.invoke(
+    //   {
+    //     query,
+    //    user_id,
+    //   },
+    //   {
+    //     configurable: {
+    //       thread_id:user_id.toString()
+    //     },
+    //   }
+    // );
+
+    
 };

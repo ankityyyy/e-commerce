@@ -14,7 +14,7 @@ const productSchema = new mongoose.Schema(
       required: true,
     },
     size:{
-        type:[String],
+        type:String,
        enum: ["XS","S","M","L","XL","XXL"],
     },
 
@@ -49,7 +49,7 @@ const productSchema = new mongoose.Schema(
       type: Boolean,
       default: false,
     },
-
+ 
     images: [
       {
         filename: String,

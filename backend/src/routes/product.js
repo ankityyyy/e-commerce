@@ -20,6 +20,7 @@ router.get("/search", wrapAsync(getProductByName));
 router.get("/:id",isLogin,  rateLimiter(5, 60, "product"),wrapAsync(getProductById));
 
 
+
 router.post(
   "/",
   isLogin,
@@ -31,7 +32,7 @@ router.post(
 );
 
 
-router.put(
+router.patch(
   "/:id",
   isLogin,
   roleMiddleware("admin", "seller"),

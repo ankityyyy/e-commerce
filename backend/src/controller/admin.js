@@ -8,7 +8,7 @@ const openai = new OpenAI({
 });
 
 export const adminDashboard = async (req, res) => {
-  console.log("req come")
+
   try {
     const [orders, products, users] = await Promise.all([
       Order.find(),
@@ -161,8 +161,7 @@ Rules:
       console.log("AI parse error:", e.message);
     }
 
-    console.log(aiSalesSummary)
-    console.log( aiProductInsights)
+    
     // =================================================
     // STEP 7: FINAL RESPONSE
     // =================================================

@@ -17,6 +17,7 @@ import  cartRoute from "./src/routes/cart.js";
 import razorpayRoute from "./src/routes/payment.js"
  import aiRoutes from "./src/routes/ai.routes.js";
  import {VectorStore} from "./src/services/vectoeStore.js"
+ 
 
 
 
@@ -45,7 +46,9 @@ app.set("trust proxy", 1);
 
 app.use(
   cors({
-    origin: ["https://majestic-fudge-6b1920.netlify.app", "https://zippy-crostata-e0d3dc.netlify.app"],
+    // origin: ["http://localhost:5173", "http://localhost:5174"],
+    origin: ["https://majestic-fudge-6b1920.netlify.app",
+            "https://zippy-crostata-e0d3dc.netlify.app"],
     credentials: true,
     methods: ["GET", "POST", "PUT","PATCH", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
@@ -115,6 +118,12 @@ app.get("/", (req, res) => {
   res.json("i am working");
 });
 
+app.get("/docker", (req, res) => {
+ 
+  res.json("i am working");
+});
+
+
 
 
 /* ================= OTHER ROUTES ================= */
@@ -129,16 +138,16 @@ app.use("/razorpay/v1",razorpayRoute)
 
 /* ================= ERROR ================= */
 app.use((req, res, next) => {
-  console.log("REQUEST:", req.method, req.url);
+
   next(new ExpressError("Page not found", StatusCodes.NOT_FOUND));
 });
 
 app.use((err, req, res, next) => {
-  console.log("ERROR:", err);
   res.status(err.statusCode || 500).json({
     message: err.message || "Something went wrong",
   });
 });
+
 
 /* ================= SERVER ================= */
 const PORT = process.env.PORT || 2000;

@@ -20,7 +20,7 @@ const cartSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
-      unique: true,
+      unique: true, 
       index: true,
     },
 
@@ -29,10 +29,6 @@ const cartSchema = new mongoose.Schema(
       default: [],
     },
 
-    totalPrice: {
-      type: Number,
-      default: 0,
-    },
   },
   { timestamps: true }
 );

@@ -1,13 +1,25 @@
-FROM node:20
+FROM node:20-alpine AS builder
 
-WORKDIR /app
+WORKDIR /build
 
 COPY package*.json ./
 
-RUN npm install --legacy-peer-deps
+RUN npm ci --legacy-peer-deps
 
 COPY . .
 
+FROM node:20-alpine AS runner
+
+WORKDIR /app
+
+RUN apk add --no-cache curl
+
+HEALTHCHECK --interval=90s --timeout=20s --retries=3 \
+CMD curl -f http://localhost:2000/docker || exit 1
+
+COPY --from=builder /build ./
+
 EXPOSE 2000
 
-CMD ["npm", "start"]
+CMD ["node", "app.js"]
+

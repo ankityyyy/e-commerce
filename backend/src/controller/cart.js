@@ -16,57 +16,30 @@ export const getCart=async(req,res)=>{
 
 }
 
-// export const getCart = async (req, res) => {
-//   const cartKey = `cart:${req.user._id}`;
-
-//   const cartItems = await redisClient.hGetAll(cartKey);
-
-//   let result = [];
-
-//   for (let productId in cartItems) {
-//     const product = await Product.findById(productId);
-
-//     if (product) {
-//       result.push({
-//         product,
-//         quantity: Number(cartItems[productId])
-//       });
-//     }
-//   }
-
-//   res.status(200).json({
-//     message: "Cart fetched (Redis)",
-//     item: result
-//   });
-// };
-
 
 export const createCart = async (req, res, next) => {
   try {
     const { id } = req.params;
     const { quantity } = req.body;
 
-    // ✅ validate quantity
+  
     if (quantity === undefined) {
-      return next(new ExpressError("Quantity is missing", 400));
+      return next(new ExpressError("Quantity is missing", StatusCodes.BAD_REQUEST));
     }
 
     const qty = Number(quantity);
     if (!qty || qty <= 0) {
-      return next(new ExpressError("Invalid quantity", 400));
+      return next(new ExpressError("Invalid quantity", StatusCodes.BAD_REQUEST));
     }
 
-    // ✅ get product
+
     const product = await Product.findById(id);
     if (!product) {
-      return next(new ExpressError("Product not found", 400));
+      return next(new ExpressError("Product not found", StatusCodes.BAD_REQUEST));
     }
 
-    if (!product.price) {
-      return next(new ExpressError("Product price missing", 400));
-    }
+   
 
-    // ✅ find cart
     let cart = await Cart.findOne({ userId: req.user._id });
 
     if (!cart) {
@@ -76,40 +49,28 @@ export const createCart = async (req, res, next) => {
           {
             productId: id,
             quantity: qty,
-            price: Number(product.price),
           },
         ],
       });
     } else {
+
       const item = cart.items.find(
         (i) => i.productId.toString() === id
       );
 
       if (item) {
         item.quantity += qty;
+
       } else {
+
         cart.items.push({
           productId: id,
           quantity: qty,
-          price: Number(product.price),
         });
       }
     }
 
-    // 🔥 IMPORTANT FIX: handle old items without price
-    for (let item of cart.items) {
-      if (!item.price) {
-        const prod = await Product.findById(item.productId);
-        item.price = Number(prod.price) || 0;
-      }
-    }
-
-    // ✅ safe total calculation (no NaN ever)
-    cart.totalPrice = cart.items.reduce((acc, item) => {
-      const q = Number(item.quantity) || 0;
-      const p = Number(item.price) || 0;
-      return acc + q * p;
-    }, 0);
+    
 
     await cart.save();
 
@@ -126,37 +87,6 @@ export const createCart = async (req, res, next) => {
 
 
 
-// export const createCart = async (req, res, next) => {
-//   try {
-//     const { id } = req.params;
-//     const { quantity } = req.body;
-
-//     const qty = Number(quantity);
-//     if (!qty || qty <= 0) {
-//       return next(new ExpressError("Invalid quantity", 400));
-//     }
-
-//     const product = await Product.findById(id);
-//     if (!product) {
-//       return next(new ExpressError("Product not found", 400));
-//     }
-
-//     const cartKey = `cart:${req.user._id}`;
-
-//     // 🔥 Add / update quantity
-//     await redisClient.hIncrBy(cartKey, id, qty);
- 
-//     // Optional: expire cart after 24h
-//     await redisClient.expire(cartKey, 86400);
-
-//     res.status(201).json({
-//       message: "Added to cart (Redis)"
-//     });
-
-//   } catch (err) {
-//     next(err);
-//   }
-// };
 
 
 export const deleteCart = async (req, res, next) => {
@@ -183,3 +113,24 @@ export const deleteCart = async (req, res, next) => {
 
   return res.status(StatusCodes.OK).json({ message: "Item removed from cart", data:cart });
 };
+
+
+// {
+//   _id: ObjectId("cart1111111111111111111111"),
+
+//   userId: ObjectId("111111111111111111111111"),
+
+//   items: [
+//     {
+//       productId: ObjectId("aaaa11111111111111111111"),
+//       quantity: 2
+//     },
+//     {
+//       productId: ObjectId("bbbb22222222222222222222"),
+//       quantity: 3
+//     }
+//   ],
+
+//   createdAt: ISODate("2026-08-15T10:00:00Z"),
+//   updatedAt: ISODate("2026-08-15T10:00:00Z")
+// }

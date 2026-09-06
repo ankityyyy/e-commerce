@@ -29,7 +29,6 @@ export async function generateReviewSummary(productId) {
       isDeleted: false
     });
 
-    console.log(reviews);
 
     if (!reviews.length) {
       return {
@@ -48,9 +47,8 @@ Comment: ${review.comment}
       })
       .join("\n");
 
-    // 4. AI summary
-    const response =
-      await openai.chat.completions.create({
+   
+    const response =await openai.chat.completions.create({
 
         model: "gpt-4.1-mini",
 

@@ -7,42 +7,6 @@ import redisClient from "../redis/redis.js"
 
 export const getAllProduct=async(req,res)=>{  
 
-//   let {pageNo,limit}=req.query;
-
-//   let options={ 
-//     page:parseInt(page),
-//     limit:parseInt(limit)
-//   }
-
-//   let product=await Product.paginate({},options);
-
-// // {
-//   docs: [...products],        // actual data
-//   totalDocs: 100,             // total products
-//   limit: 5,                   // per page
-//   totalPages: 20,
-//   page: 2,
-//   hasNextPage: true,
-//   hasPrevPage: true
-// }
-
-// product: result.docs
-// 👉 Only sending current page data
-
-  // return res.status(StatusCodes.OK).json({
-  //       product: result.docs,
-  //       pagination: {
-  //         totalItems: result.totalDocs,
-  //         totalPages: result.totalPages,
-  //         currentPage: result.page,
-  //         limit: result.limit,
-  //         hasNextPage: result.hasNextPage,
-  //         hasPrevPage: result.hasPrevPage
-  //       },
-  //       message: "Products fetched successfully"
-  //     });
-
-
 
      let alldata = await Product.find({});
   return res.status(StatusCodes.OK).json({ product: [ ...alldata] ,message:"featch all product"});

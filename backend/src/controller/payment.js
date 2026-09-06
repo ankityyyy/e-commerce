@@ -38,7 +38,6 @@ export const verifyPayment = async (req, res) => {
       .digest("hex");
 
     if (expected !== razorpay_signature) {
-      // ❌ mark failed
       await Order.findByIdAndUpdate(orderId, {
         paymentStatus: "FAILED",
       });
@@ -46,14 +45,14 @@ export const verifyPayment = async (req, res) => {
       return res.status(400).json({ success: false });
     }
 
-    // ✅ Step 2: get order from DB (IMPORTANT)
+    
     const order = await Order.findById(orderId);
 
     if (!order) {
       return res.status(404).json({ success: false });
     }
 
-    // ✅ Step 3: save payment (NO frontend trust)
+    
     await Payment.create({
       userId: order.userId,
       orderId: order._id,
@@ -63,7 +62,7 @@ export const verifyPayment = async (req, res) => {
       transactionId: razorpay_payment_id,
     });
 
-    // ✅ Step 4: update order
+    
     order.paymentStatus = "PAID";
     order.orderStatus = "CONFIRMED";
     order.transactionId = razorpay_payment_id;
@@ -75,27 +74,22 @@ export const verifyPayment = async (req, res) => {
 
   const user = await User.findById(order.userId);
 
-  console.log("USER EMAIL:", user.email);
 
   await sendOrderEmail(user.email, order);
 
-  console.log("✅ ORDER EMAIL SENT");
 
 } catch (err) {
-
-  console.log("❌ EMAIL SEND ERROR");
-
   console.log(err);
 }
 
-    // ✅ Step 5: update stock
+    
     for (const item of order.items) {
       await Product.findByIdAndUpdate(item.productId, {
         $inc: { stock: -item.quantity },
       });
     }
 
-    // ✅ Step 6: clear cart
+    
     await Cart.findOneAndUpdate(
       { userId: order.userId },
       { $set: { items: [], totalPrice: 0 } }
@@ -108,6 +102,7 @@ export const verifyPayment = async (req, res) => {
     res.status(500).json({ success: false });
   }
 };
+ 
 
 export const createRazorpayOrder = async (req, res) => {
   try {

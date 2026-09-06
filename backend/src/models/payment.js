@@ -6,7 +6,7 @@ const paymentSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
-    },
+    }, 
 
     orderId: {
       type: mongoose.Schema.Types.ObjectId,
@@ -35,7 +35,7 @@ const paymentSchema = new mongoose.Schema(
 
     transactionId: {
       type: String,
-      unique: true, // ✅ important
+      unique: true, 
     },
   },
   { timestamps: true }

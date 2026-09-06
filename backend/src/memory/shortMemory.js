@@ -16,3 +16,4 @@ export function addMessage(user_id, role, content) {
     history.shift();
   }
 }
+
