@@ -14,25 +14,23 @@ function AISearch() {
 
   return (
 
-    <div className="min-h-screen bg-gradient-to-l from-[#141414] to-[#0c2025] ">
+    <div className="min-h-screen bg-gradient-to-l from-[#141414] to-[#0c2025]">
 
       {/* AI MESSAGE */}
 
-     {aiMessage && (
+      {aiMessage && (
+        <div className="w-full flex items-center justify-center mb-[20px]">
 
-  <div className="w-full flex items-center justify-center mb-[20px]">
+          <div className="max-w-[900px] w-full bg-gradient-to-r from-[#1f2937] to-[#111827] border border-[#374151] shadow-lg rounded-2xl px-[25px] py-[20px] mt-[120px]">
 
-    <div className="max-w-[900px] w-full bg-gradient-to-r from-[#1f2937] to-[#111827] border border-[#374151] shadow-lg rounded-2xl px-[25px] py-[20px] mt-[120px]">
+            <p className="text-[#d1fae5] text-[22px] font-semibold tracking-wide text-center">
+              {aiMessage}
+            </p>
 
-      <p className="text-[#d1fae5] text-[22px] font-semibold tracking-wide text-center">
-        {aiMessage}
-      </p>
+          </div>
 
-    </div>
-
-  </div>
-
-)}
+        </div>
+      )}
 
       {/* LOADING */}
 
@@ -52,8 +50,8 @@ function AISearch() {
 
       {/* NO PRODUCTS */}
 
-      {!loading && products.length === 0 && (
-        <h1 className="text-center text-gray-400 text-[22px] mt-[50px]">
+      {aiMessage && !loading && products.length === 0 && !error && (
+        <h1 className="text-center text-gray-400 text-[22px] mt-[90px]">
           No Products Found
         </h1>
       )}

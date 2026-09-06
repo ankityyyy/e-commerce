@@ -5,11 +5,11 @@ import server from "../../env";
 export const addProductToCart = createAsyncThunk(
   "cart/productAddtocart",
   async ({ id, qty }, thunkAPI) => {
-    console.log("data send")
     try {
-      let response = await axios.post(`${server}/cart/v1/${id}`, {  quantity: qty },{withCredentials: true,}
+      let response = await axios.post(`${server}/cart/v1/${id}`, 
+        {  quantity: qty },
+        {withCredentials: true,}
       );
-      console.log(response.data)
       return thunkAPI.fulfillWithValue(response.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(
@@ -51,15 +51,13 @@ export const placeOrder = createAsyncThunk(
   "order/placeOrder",
   async (orderData, thunkAPI) => {
     try {
-      console.log("SENDING:", orderData); // debug
-
       const response = await axios.post(
         `${server}/order/v1`,
-        orderData, // ✅ NOT wrapped
+        orderData, 
         {
           withCredentials: true,
           headers: {
-            "Content-Type": "application/json", // ✅ important
+            "Content-Type":"application/json", 
           },
         }
       );
@@ -76,7 +74,6 @@ export const placeOrder = createAsyncThunk(
 export const getAllPlaceOrder = createAsyncThunk(
   "order/getAllPlaceOrder",
   async (_, thunkAPI) => {
-    console.log("getAllPlaceOrder call")
     try {
       let response = await axios.get(`${server}/order/v1`, {
           withCredentials: true,});
@@ -100,7 +97,6 @@ const initialState = {
   message: "",
 };
 
-console.log()
 
 export const cartSlice = createSlice({
   name: "cart",

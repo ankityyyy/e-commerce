@@ -6,7 +6,7 @@ export const getProductai = createAsyncThunk(
   "productai/getProductai",
 
   async (query, thunkAPI) => {
-
+console.log("data featch")
     try {
 
       const res = await axios.post(
@@ -17,6 +17,7 @@ export const getProductai = createAsyncThunk(
         }
       );
 
+      console.log(res.data)
       return res.data;
 
     } catch (err) {

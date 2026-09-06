@@ -110,7 +110,7 @@ function Cart() {
               )}
             </p>
 
-            <button
+            <button 
               
                onClick={() => navigate("/checkout")}
               className="w-full mt-4 bg-green-600 text-white py-2 rounded cursor-pointer"

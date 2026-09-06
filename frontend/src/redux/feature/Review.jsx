@@ -7,7 +7,6 @@ import server from "../../env.js";
 export const addReview = createAsyncThunk(
   "review/addReview",
   async ({ id, reviewData }, thunkAPI) => {
-    console.log("data come ",id)
     try {
       const res = await axios.post(
         `${server}/review/v1/${id}`,
@@ -28,18 +27,15 @@ export const addReview = createAsyncThunk(
 export const getReviewId = createAsyncThunk(
   "review/getReviewId",
   async (id, thunkAPI) => {
-    console.log("review data fetch:", id);
+  
 
     try {
       const res = await axios.get(
         `${server}/review/v1/${id}`,
         { withCredentials: true }
       );
-
-      console.log("review data", res.data);
       return res.data;
     } catch (err) {
-      console.log("ERROR:", err);
       return thunkAPI.rejectWithValue(
         err.response?.data || { message: "Fetch review failed" }
       );

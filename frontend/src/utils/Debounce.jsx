@@ -1,5 +1,5 @@
 export default function Debounce(fn,delay){
-     let timeId;
+     let timerId;
 
      return function(...args){
           clearTimeout(timerId);

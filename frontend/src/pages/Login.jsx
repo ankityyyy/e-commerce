@@ -27,7 +27,6 @@ function Login() {
     dispatch(login(formData))
       .unwrap()
       .then((res) => {
-        console.log("Login successful:", res);
 
         setFormData({
           email: "",

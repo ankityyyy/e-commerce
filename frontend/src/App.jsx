@@ -34,6 +34,7 @@ const Login = lazy(() => import("./pages/Login"));
 const SignUp = lazy(() => import("./pages/Signup"));
 const AISearch =lazy(()=>import("./pages/AISearch"))
 
+
 function App() {
    const dispatch = useDispatch();
  
@@ -44,36 +45,11 @@ useEffect(() => {
 
 
 
-  // return (
-  //   <>
-  //   <Routes>
-  //     {/* PUBLIC */}
-  //     <Route element={<Layout />}>
-  //       <Route path="/login" element={<Login />} />
-  //       <Route path="/signup" element={<SignUp />} />
-  //     </Route>
-
-  //     {/* PROTECTED */}
-  //     <Route element={<ProtectedRoute />}>
-  //       <Route element={<ComponentLayout />}>
-  //         <Route path="/" element={<Home />} />
-  //         <Route path="/collection" element={<Collections />} />
-  //         <Route path="/about" element={<About />} />
-  //         <Route path="/contact" element={<Contact />} />
-  //         <Route path="/cart" element={<Cart />} />
-  //         <Route path="/checkout" element={<Checkout />} />
-  //         <Route path="/orders" element={<MyOrders />} />
-  //         <Route path="/product/:id" element={<ProductDetails />} />
-  //       </Route>
-  //     </Route>
-  //   </Routes>
-  //   <Ai/>
-  //   </>
-  // );
+ 
 
   return (
   <>
-    <Suspense fallback={<h1>Loading...</h1>}>
+    <Suspense fallback={<Spinner/>}>
       <Routes>
 
         {/* PUBLIC */}
@@ -98,9 +74,10 @@ useEffect(() => {
         </Route>
 
       </Routes>
+   
     </Suspense>
 
-    <Ai />
+    
   </>
 );
 }
