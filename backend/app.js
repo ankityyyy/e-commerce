@@ -126,7 +126,7 @@ app.get("/docker", (req, res) => {
 
 
 
-/* ================= OTHER ROUTES ================= */
+
 app.use("/user/v1", userRoute);
 app.use("/product/v1", productRoute);
 app.use("/review/v1",reviewRoute)  
