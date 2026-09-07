@@ -63,9 +63,9 @@ function ProductDetails() {
       setShowSummary(true);
 
       const res = await fetch(
-        `http://localhost:2000/api/v1/ai/review-summary/${id}`
+        `https://e-commerce-2p81.onrender.com/api/v1/ai/review-summary/${id}`
       );
-//https://e-commerce-2p81.onrender.com
+
       const data = await res.json();
 
       setAiSummary(data.result.summary);
